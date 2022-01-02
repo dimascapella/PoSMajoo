@@ -1,9 +1,9 @@
-## Point of Sale
+# Point of Sale
 
-# Database
+## Database
 [Database Link](DatabaseData)
 
-# Data
+## Data
 Lakukan Command `php artisan migrate:fresh --seed` untuk membuat 1 data admin dan 1 data user
 
 ```
@@ -19,8 +19,8 @@ Lakukan Command `php artisan migrate:fresh --seed` untuk membuat 1 data admin da
 }
 ```
 
-# Modules
+## Modules
 Lakukan Command `npm i` untuk mendapatkan modules tambahan dari NPM
 
-# Running Apps
+## Execute Apps
 Lakukan Command `php artisan serve` untuk menjalankan aplikasi
