@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Source Serif Pro', serif;
+}
+
+/* Navbar Custom Css */
+
+.nav-link {
+    margin-left: 25px;
+    transition: .2s ease-in-out;
+}
+.nav-link:hover {
+    transform: scale(1.1);
+}
+
+/* Product Custom Css */
+
+.products{
+    height: 580px !important;
+}
+
+@media (max-width: 400px){
+    .products{
+        height: 450px !important;
+    }
+
+    .products .desc-content{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+}
+
+/* Table Custom Css */
+table * {
+    white-space: nowrap;
+}
+
+table tbody tr td:last-child{
+    white-space: normal;
+}
+
+/* Customize Css Classes */
+
+.text-justify{
+    text-align: justify;
+}
+
+.w-15{
+    width: 15%;
+}
