@@ -55,7 +55,7 @@
                 <div class="input-group mb-3">
                     <label class="input-group-text w-15">Supplier</label>
                     <select class="form-select customSelect2" style="width: 85%" name="supplier_id">
-                        <option selected>Pilih Kategori</option>
+                        <option selected>Pilih Supplier</option>
                         @foreach($dataSupplier as $valueSupplier)
                             <option value="{{ $valueSupplier->id }}">{{ $valueSupplier->supplier_name }}</option>
                         @endforeach
@@ -69,13 +69,16 @@
                 <div class="input-group mb-3">
                     <div class="row">
                         <div class="col-md-8">
-                            <input type="file" class="form-control w-100" id="image" name="image" onchange="previewImage()">
+                            <input type="file" class="form-control w-100" id="image" name="image" onchange="makeProgress()">
                         </div>
                         <div class="col-md-4">
-                            <img class="img-preview img-fluid w-100" />
+                            <img class="img-preview img-fluid w-100" src="{{ asset('storage/post-images/r.png') }}" />
                         </div>
                     </div>
-                </div>  
+                </div> 
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div> 
                 @error('description')
                 <label>
                     <div class="text-danger">{{ $message }}</div>
@@ -126,6 +129,25 @@
     })
 </script>
 <script>
+    var bar = document.querySelector(".progress-bar");
+    var i = 0;
+    var timer;
+    function makeProgress(){
+        console.log(i);
+        if(i < 100){
+            i = i + 1;
+            bar.style.width = i + "%";
+            bar.innerText = i + "%";
+        }
+
+        var timer = setTimeout("makeProgress()", 50);
+        if (i >= 100){
+            previewImage();
+            clearTimeout(timer);
+            i = 0;
+        }
+    }
+
     function previewImage(){
         const image = document.querySelector('#image');
         const preview = document.querySelector('.img-preview');
@@ -136,7 +158,6 @@
             preview.src = oFREvent.target.result;
         }
     }
-    
 </script>
 
 @endsection

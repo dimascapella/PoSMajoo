@@ -26,10 +26,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Dimas Capella',
-            'email' => 'dimas@majoo.com',
+            'name' => 'user',
+            'email' => 'user@majoo.com',
             'is_admin' => false,
-            'password' => Hash::make('Dimas1590')
+            'password' => Hash::make('user')
         ]);
     }
 }

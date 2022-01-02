@@ -64,7 +64,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <input type="hidden" name="oldImage" value="{{ $dataProduct->image }}">
-                            <input type="file" class="form-control" id="image" name="image" onchange="previewImage()" value="{{ $dataProduct->image }}">
+                            <input type="file" class="form-control" id="image" name="image" onchange="makeProgress()" value="{{ $dataProduct->image }}">
                         </div>
                         <div class="col-md-4">
                             @if ($dataProduct->image)
@@ -75,6 +75,9 @@
                         </div>
                     </div>
                 </div>  
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div> 
                 @error('description')
                 <label>
                     <div class="text-danger">{{ $message }}</div>
@@ -93,16 +96,35 @@
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
 <script>
-function previewImage(){
-    const image = document.querySelector('#image');
-    const preview = document.querySelector('.img-preview');
-    const oFReader = new FileReader();
-    oFReader.readAsDataURL(image.files[0]);
+    var bar = document.querySelector(".progress-bar");
+    var i = 0;
+    var timer;
+    function makeProgress(){
+        console.log(i);
+        if(i < 100){
+            i = i + 1;
+            bar.style.width = i + "%";
+            bar.innerText = i + "%";
+        }
 
-    oFReader.onload = function(oFREvent){
-        preview.src = oFREvent.target.result;
+        var timer = setTimeout("makeProgress()", 50);
+        if (i >= 100){
+            previewImage();
+            clearTimeout(timer);
+            i = 0;
+        }
     }
-}
+
+    function previewImage(){
+        const image = document.querySelector('#image');
+        const preview = document.querySelector('.img-preview');
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+    
+        oFReader.onload = function(oFREvent){
+            preview.src = oFREvent.target.result;
+        }
+    }
 </script>
 <script>
     document.addEventListener('trix-file-accept', function(e){
